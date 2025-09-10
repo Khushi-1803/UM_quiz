@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.Correct{
+    background-color: lightgreen; color:black ;
+}
+.Wrong{
+    background-color: lightcoral; color:black;
+}
