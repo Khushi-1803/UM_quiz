@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import WelcomePage from "./pages/WelcomePage.jsx";
-import Category from "./pages/category.jsx";
+import Category from "./pages/Category.jsx";
 import QuizPage from "./pages/QuizPage.jsx";
 
 function App() {
