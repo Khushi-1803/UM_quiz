@@ -3,102 +3,32 @@ import { data } from "../assets/data.js";
 import { qassets } from "../assets/qassets.js";
 import { useLocation } from "react-router-dom";
 
-// const QuizPage = () => {
-//   // let [index, setIndex] = useState(0); //for obtaing the index
-//   // let [question, setQuestion] = useState(data[index]); //
-//   let [lock, setLock] = useState(false); //after selection of one option , can't choose another option
-//   let [score, setScore] = useState(0);
-//   let [result, setResult] = useState(false); //for result
-
-//   const { state } = useLocation();
-//   const selectedCategory = state?.category;
-
-//   const filteredData = data.filter((q) => q.category === selectedCategory);
-
-//   // update initial states to use filtered data
-//   let [index, setIndex] = useState(0);
-//   let [question, setQuestion] = useState(filteredData[0]);
-
-//   //for heighlighting correct option
-//   let option1 = useRef(null);
-//   let option2 = useRef(null);
-//   let option3 = useRef(null);
-//   let option4 = useRef(null);
-//   let option_array = [option1, option2, option3, option4];
-
-//   //for checking the answer
-//   const checkAnswer = (e, ans) => {
-//     if (lock === false) {
-//       if (question.ans === ans) {
-//         e.target.classList.add("Correct");
-//         setLock(true);
-//         setScore((prev) => prev + 1);
-//       } else {
-//         e.target.classList.add("Wrong");
-//         setLock(true);
-//         option_array[question.ans - 1].current.classList.add("Correct");
-//       }
-//     }
-//   };
-//   //next button
-//   const next = () => {
-//     if (lock === true) {
-//       if (index === filteredData.length - 1) {
-//         setResult(true);
-//         return 0;
-//       }
-//       setIndex(++index);
-//       setQuestion(filteredData[index]);
-//       setLock(false);
-//       option_array.map((option) => {
-//         option.current.classList.remove("Wrong");
-//         option.current.classList.remove("Correct");
-//         return null;
-//       });
-//     }
-//   };
-//   //for reset button
-//   const reset = () => {
-//     setIndex(0);
-//     setQuestion(data[0]);
-//     setScore(0);
-//     setLock(false);
-//     setResult(false);
-//   };
-
-
-  const QuizPage = () => {
-  let [lock, setLock] = useState(false);
+const QuizPage = () => {
+  // let [index, setIndex] = useState(0); //for obtaing the index
+  // let [question, setQuestion] = useState(data[index]); //
+  let [lock, setLock] = useState(false); //after selection of one option , can't choose another option
   let [score, setScore] = useState(0);
-  let [result, setResult] = useState(false);
+  let [result, setResult] = useState(false); //for result
 
   const { state } = useLocation();
   const selectedCategory = state?.category;
 
   const filteredData = data.filter((q) => q.category === selectedCategory);
 
+  // update initial states to use filtered data
   let [index, setIndex] = useState(0);
-  let [question, setQuestion] = useState(filteredData[0] || null);
+  let [question, setQuestion] = useState(filteredData[0]);
 
-  // highlight refs
+  //for heighlighting correct option
   let option1 = useRef(null);
   let option2 = useRef(null);
   let option3 = useRef(null);
   let option4 = useRef(null);
   let option_array = [option1, option2, option3, option4];
 
-  // if no questions available
-  if (!question) {
-    return (
-      <div className="h-[100vh] flex items-center justify-center bg-black text-white">
-        <p>No questions found for this category.</p>
-      </div>
-    );
-  }
-
-  // check answer
+  //for checking the answer
   const checkAnswer = (e, ans) => {
-    if (!lock) {
+    if (lock === false) {
       if (question.ans === ans) {
         e.target.classList.add("Correct");
         setLock(true);
@@ -110,33 +40,31 @@ import { useLocation } from "react-router-dom";
       }
     }
   };
-
-  // next question
+  //next button
   const next = () => {
-    if (lock) {
+    if (lock === true) {
       if (index === filteredData.length - 1) {
         setResult(true);
-        return;
+        return 0;
       }
-      const newIndex = index + 1;
-      setIndex(newIndex);
-      setQuestion(filteredData[newIndex]);
+      setIndex(++index);
+      setQuestion(filteredData[index]);
       setLock(false);
-      option_array.forEach((option) => {
-        option.current.classList.remove("Wrong", "Correct");
+      option_array.map((option) => {
+        option.current.classList.remove("Wrong");
+        option.current.classList.remove("Correct");
+        return null;
       });
     }
   };
-
-  // reset quiz
+  //for reset button
   const reset = () => {
     setIndex(0);
-    setQuestion(filteredData[0] || null);
+    setQuestion(data[0]);
     setScore(0);
     setLock(false);
     setResult(false);
   };
-
   return (
     <div className="h-[100vh] flex flex-col items-center justify-center bg-black">
       <div className="h-[550px] w-[550px] bg-gradient-to-bl from-purple-500 via-pink-500 to-[#f70776] rounded-xl'>">
