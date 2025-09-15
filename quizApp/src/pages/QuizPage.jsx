@@ -4,8 +4,7 @@ import { qassets } from "../assets/qassets.js";
 import { useLocation } from "react-router-dom";
 
 const QuizPage = () => {
-  // let [index, setIndex] = useState(0); //for obtaing the index
-  // let [question, setQuestion] = useState(data[index]); //
+
   let [lock, setLock] = useState(false); //after selection of one option , can't choose another option
   let [score, setScore] = useState(0);
   let [result, setResult] = useState(false); //for result
